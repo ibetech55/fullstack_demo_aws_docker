@@ -1,0 +1,260 @@
+openapi: 3.0.0
+info:
+  title: WAT BAT API
+  version: 1.0.0
+  description: WAT BAT Endpoints
+servers:
+  - url: http://localhost:4000
+    description: Local server
+  - url: "https://dev-ibetech.com"
+    description: Development server
+paths:
+  "/api/contact":
+    post:
+      summary: Create a new contact
+      tags:
+        - Contacts
+      requestBody:
+        description: Create contact request body
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  example: John
+                lastName:
+                  type: string
+                  example: Doe
+                address:
+                  type: string
+                  example: 12345, James St.
+                city:
+                  type: string
+                  example: New York
+                state:
+                  type: string
+                  example: New York
+                zipCode:
+                  type: string
+                  example: 34567
+                phoneNumber:
+                  type: string
+                  example: "(343)378-9090"
+                email:
+                  type: string
+                  example: "test@test.com"
+      responses:
+        "201":
+          description: User created successfully
+        "400":
+          description: Bad request
+        get:
+      summary: Get a user by email
+      tags:
+        - Quotes
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: string
+                  price: number
+                  departureLocation: string
+                  destinationLocation: string
+                  departDate: string
+                  returnDate: string
+                  numberTravellers: 0
+                  transportation: string
+                  status: string
+                  active: true
+                  contactId: string
+                  createdAt: "2023-10-11T14:30:00Z"
+                  updatedAt: "2023-10-11T14:30:00Z"
+                  deletedAt: "2023-10-11T14:30:00Z"
+              schema:
+                "$ref": "#/components/schemas/Quote"
+  "/api/contact/{id}":
+    get:
+      summary: Get a contact by id
+      tags:
+        - Contacts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Contact Id
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: string
+                firstName: string
+                lastName: string
+                address: string
+                city: string
+                state: string
+                phoneNumber: string
+                email: string
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                address:
+                  type: string
+                state:
+                  type: string
+                city:
+                  type: string
+                phoneNumber:
+                  type: string
+                email:
+                  string
+  "/api/quote":
+    post:
+      summary: Create a new quote
+      tags:
+        - Quotes
+      requestBody:
+        description: Create quote request body
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                departureLocation:
+                  type: string
+                  example: New York
+                destinationLocation:
+                  type: string
+                  example: New York
+                returnDate:
+                  type: string
+                  example: "2023-11-10"
+                departDate:
+                  type: string
+                  example: "2023-11-23"
+                numberTravellers:
+                  type: number
+                  example: 4
+                contactId:
+                  type: string
+                  example: "67f24830-c5e8-4174-aad8-80f4cb2d07b1"
+                transportation:
+                  type: string
+                  example: "Plane"
+      responses:
+        "201":
+          description: Quote created successfully
+        "400":
+          description: Bad request
+    get:
+      summary: Get a user by email
+      tags:
+        - Quotes
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: string
+                  price: number
+                  departureLocation: string
+                  destinationLocation: string
+                  departDate: string
+                  returnDate: string
+                  numberTravellers: 0
+                  transportation: string
+                  status: string
+                  active: true
+                  contactId: string
+                  createdAt: "2023-10-11T14:30:00Z"
+                  updatedAt: "2023-10-11T14:30:00Z"
+                  deletedAt: "2023-10-11T14:30:00Z"
+              schema:
+                "$ref": "#/components/schemas/Quote"
+  "/api/quote/{id}":
+    get:
+      summary: Get a quote by id
+      tags:
+        - Quotes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Quote Id
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: string
+                departureLocation: string
+                destinationLocation: string
+                departDate: string
+                returnDate: string
+                numberTravellers: 0
+                transportation: string
+                status: string
+                active: true
+                contactId: string
+                createdAt: "2023-10-11T14:30:00Z"
+                updatedAt: "2023-10-11T14:30:00Z"
+                deletedAt: "2023-10-11T14:30:00Z"
+            schema:
+              "$ref": "#/components/schemas/Quote"
+components:
+  schemas:
+    Quote:
+      type: object
+      properties:
+        id:
+          type: string
+        departureLocation:
+          type: string
+        price:
+          type: number
+        destinationLocation:
+          type: string
+        departDate:
+          type: string
+        returnDate:
+          type: string
+        numberTravellers:
+          type: number
+        transportation:
+          type: string
+        status:
+          type: string
+        active:
+          type: boolean
+        contactId:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        deletedAt:
+          type: string
+tags:
+  - name: Contacts
+    description: API operations related to contacts
+  - name: Quotes
+    description: API operations related to quotes

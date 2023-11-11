@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+    backend:
+        container_name: backend
+        image: backend_image
+        build:
+            context: ./backend
+        ports:
+            - "4000:4000"
+        environment:
+            - ./.env
+        volumes:
+        - ./backend:/app
+        - node-build:/app/build
+    frontend:
+        container_name: frontend
+        image: frontend_image
+        build:
+            context: ./frontend
+        ports:
+            - "3000:3000"
+        environment:
+            - ./.env
+        volumes:
+            - ./frontend:/app
+            - react-build:/app/build
+        depends_on:
+            - backend
+    nginx:
+        image: nginx:alpine
+        ports:
+            - 8080:80
+        volumes:
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - react-build:/usr/share/nginx/html
+        depends_on:
+            - frontend
+volumes:
+  react-build:
+  node-build:

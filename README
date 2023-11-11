@@ -1,0 +1,39 @@
+Backend:
+
+- cd backend_wet_bat
+- run "npm intstall to install dependencies"
+- Create a .env file in root of /backend_wet_bat and add the following variables
+  - PORT
+  - DATABASE_PORT
+  - DATABASE_USERNAME
+  - DATABASE_PASSWORD
+  - DATABASE_NAME
+  - DATABASE_HOST
+- run "npm run dev" to run app in dev
+
+- To build app:
+
+  - run "npm run build"
+  - run "npm start" to start app
+
+- Backend deploy URL: 'https://launch-code-test.onrender.com'
+
+Frontend:
+
+- cd frontend_wet_bat
+- run "npm intstall to install dependencies"
+- Create a .env file in root of /frontend_wet_bat and add the following variables
+  - REACT_APP_API_URL
+- run "npm run dev" to run app in dev
+
+- To build app:
+
+  - run "npm run build"
+  - run "npm start" to start app in production
+
+- Frontend deploy URL: 'https://launch-code-test-site.onrender.com'
+
+API Documentation:
+
+- Developement: https://launch-code-test.onrender.com/api-docs
+- Localhost: http://localhost:4000/api-docs
